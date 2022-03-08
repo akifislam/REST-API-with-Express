@@ -28,10 +28,25 @@ Clone down this repository. You will need `node.js` and `git` installed globally
 
 ## 🛠 Installation and Setup Instructions
 
-1. Installation: `npm install`
+* First, clone this repository'
+  ```sh
+  git clone https://github.com/akifislam/REST-Api-with-Express.git
+  ```
 
-2. In the project directory, you can run: `npm start`
+* Go inside that folder
+  ```sh
+  cd REST-API-with-Express
+  ```
 
+* Install Node Modules
+  ```sh
+  npm install
+  ```
+* Start Server
+  ```sh
+  npm start
+  ```
+  
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits as it has nodemon installed by default.
