@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+app.use(express.json());
+
 const menuCard = [
   { id: 1, name: "Pizza", price: 10 },
   { id: 2, name: "Burger", price: 15 },
@@ -30,6 +32,41 @@ app.get("/dishes/:id", (req, res) => {
     // console.log(dish);
     res.status(404).send("Dish not found");
   }
+});
+
+app.post("/dishes", (req, res) => {
+  const newDish = {
+    id: menuCard.length + 1,
+    name: req.body.name,
+  };
+  if (newDish.name.length < 4) {
+    res.status(400).send("Name must be at least 3 characters");
+  } else {
+    menuCard.push(newDish);
+    res.send(newDish);
+  }
+});
+
+app.put("/dishes/:id", (req, res) => {
+  const dish = menuCard.find((d) => d.id === parseInt(req.params.id));
+  if (!dish) {
+    res.status(404).send("Dish not found");
+    return;
+  }
+  dish.name = req.body.name;
+  res.send(dish);
+});
+
+app.delete("/dishes/:id", (req, res) => {
+  const dish = menuCard.find((d) => d.id === parseInt(req.params.id));
+  if (!dish) {
+    res.status(404).send("Dish not found");
+    return;
+  }
+  const index = menuCard.indexOf(dish);
+  menuCard.splice(index, 1);
+  res.send(dish);
+  
 });
 
 PORT = process.env.PORT || 3000;
